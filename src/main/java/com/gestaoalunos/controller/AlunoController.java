@@ -55,7 +55,6 @@ public class AlunoController {
 	
 	@GetMapping("/listar")
 	public List<Aluno> listar() {
-		List<Aluno> alunos = repo.findAll();
-		return alunos;
+		return repo.findAll();
 	}
 }
