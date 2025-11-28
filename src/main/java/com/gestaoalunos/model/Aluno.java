@@ -15,7 +15,7 @@ public class Aluno {
 	private long id;
 	private String nome;
 	private String email;
-	private Long matricula;
+	private String matricula;
 	@ManyToOne
 	@JoinColumn
 	private Curso curso;
@@ -24,7 +24,7 @@ public class Aluno {
 		
 	}
 	
-	public Aluno(String nome, String email, Long matricula, Curso curso) {
+	public Aluno(String nome, String email, String matricula, Curso curso) {
 		super();
 		this.nome = nome;
 		this.email = email;
@@ -32,38 +32,24 @@ public class Aluno {
 		this.curso = curso;
 	}
 
-	public String getNome() {
-		return nome;
+	public long getId() {
+		return id;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public String getNome() {
+		return nome;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Long getMatricula() {
+	public String getMatricula() {
 		return matricula;
-	}
-
-	public void setMatricula(Long matricula) {
-		this.matricula = matricula;
 	}
 
 	public Curso getCurso() {
 		return curso;
 	}
-
-	public void setCurso(Curso curso) {
-		this.curso = curso;
-	}
-	
-	
 }
 

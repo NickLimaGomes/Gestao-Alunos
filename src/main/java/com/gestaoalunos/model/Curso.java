@@ -14,6 +14,10 @@ public class Curso {
 	private Integer cargaHoraria;
 	private String descricao;
 	
+	public Curso() {
+		
+	}
+	
 	public Curso(String nome, Integer cargaHoraria, String descricao) {
 		super();
 		this.nome = nome;
@@ -21,23 +25,18 @@ public class Curso {
 		this.descricao = descricao;
 	}
 	
+	public long getId() {
+		return id;
+	}
+
 	public String getNome() {
 		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 	public Integer getCargaHoraria() {
 		return cargaHoraria;
 	}
-	public void setCargaHoraria(Integer cargaHoraria) {
-		this.cargaHoraria = cargaHoraria;
-	}
 	public String getDescricao() {
 		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
 	}
 }
 

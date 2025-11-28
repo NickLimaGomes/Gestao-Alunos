@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gestaoalunos.dtos.AlunoDTO;
-import com.gestaoalunos.model.Aluno;
-import com.gestaoalunos.model.AlunoRepository;
+import com.gestaoalunos.dtos.CursoDTO;
+import com.gestaoalunos.model.Curso;
+import com.gestaoalunos.model.CursoRepository;
 
 @RestController
-@RequestMapping("/aluno")
-public class AlunoController {
+@RequestMapping("/curso")
+public class CursoController {
 	
 	@Autowired
-	private AlunoRepository repo;
+	private CursoRepository repo;
 
 //	@GetMapping("/")
 //	public String home(Model model) {
@@ -51,12 +51,12 @@ public class AlunoController {
 //	}
 	
 	@PostMapping("/cadastrar")
-	public Aluno cadastrar(@RequestBody @Validated AlunoDTO dto) {
-		return repo.save(dto.toAluno());
+	public Curso cadastrar(@RequestBody @Validated CursoDTO dto) {
+		return repo.save(dto.toCurso());
 	}
 	
 	@GetMapping("/listar")
-	public List<Aluno> listar() {
+	public List<Curso> listar() {
 		return repo.findAll();
 	}
 }
