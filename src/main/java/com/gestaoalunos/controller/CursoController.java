@@ -3,18 +3,17 @@ package com.gestaoalunos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.gestaoalunos.dtos.CursoDTO;
 import com.gestaoalunos.model.Curso;
 import com.gestaoalunos.model.CursoRepository;
 
-@RestController
+//@RestController
+@Controller
 @RequestMapping("/curso")
 public class CursoController {
 	
@@ -50,13 +49,32 @@ public class CursoController {
 //		return "index";
 //	}
 	
+	// @PostMapping("/cadastrar")
+	// public Curso cadastrar(@RequestBody @Validated CursoDTO dto) {
+	// 	return repo.save(dto.toCurso());
+	// }
+
 	@PostMapping("/cadastrar")
-	public Curso cadastrar(@RequestBody @Validated CursoDTO dto) {
-		return repo.save(dto.toCurso());
+	public String cadastrar(Curso curso) { // Removemos @RequestBody e DTO
+    repo.save(curso);
+    return "redirect:/curso/listar"; // Após salvar, recarrega a página de listagem
 	}
 	
+	// @GetMapping("/listar")
+	// public List<Curso> listar() {
+	// 	return repo.findAll();
+	// }
+
 	@GetMapping("/listar")
-	public List<Curso> listar() {
-		return repo.findAll();
+	public String listar(Model model){
+		List<Curso> lista = repo.findAll();
+		model.addAttribute("cursos", lista);
+		return "cursos/lista";
+	}
+
+	@GetMapping("/novo")
+	public String novo(Model model){
+		model.addAttribute("curso", new Curso());
+		return "cursos/formulario";
 	}
 }

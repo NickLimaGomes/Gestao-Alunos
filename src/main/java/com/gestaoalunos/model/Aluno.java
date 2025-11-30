@@ -51,5 +51,25 @@ public class Aluno {
 	public Curso getCurso() {
 		return curso;
 	}
+
+	public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
 }
 

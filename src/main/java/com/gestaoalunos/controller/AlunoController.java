@@ -1,25 +1,26 @@
 package com.gestaoalunos.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gestaoalunos.dtos.AlunoDTO;
 import com.gestaoalunos.model.Aluno;
 import com.gestaoalunos.model.AlunoRepository;
 
-@RestController
+//@RestController
+@Controller
 @RequestMapping("/aluno")
 public class AlunoController {
 	
 	@Autowired
 	private AlunoRepository repo;
+
+	@Autowired
+	private com.gestaoalunos.model.CursoRepository cursoRepo;
 
 //	@GetMapping("/")
 //	public String home(Model model) {
@@ -50,13 +51,34 @@ public class AlunoController {
 //		return "index";
 //	}
 	
+	// @PostMapping("/cadastrar")
+	// public Aluno cadastrar(@RequestBody @Validated AlunoDTO dto) {
+	// 	return repo.save(dto.toAluno());
+	// }
+
 	@PostMapping("/cadastrar")
-	public Aluno cadastrar(@RequestBody @Validated AlunoDTO dto) {
-		return repo.save(dto.toAluno());
+	public String cadastrar(Aluno aluno, @RequestParam Long cursoId) {
+		com.gestaoalunos.model.Curso cursoSelecionado = cursoRepo.findById(cursoId).orElse(null);
+		aluno.setCurso(cursoSelecionado);
+		repo.save(aluno);
+		return  "redirect:/aluno/listar";
 	}
 	
+	// @GetMapping("/listar")
+	// public List<Aluno> listar() {
+	// 	return repo.findAll();
+	// }
+
 	@GetMapping("/listar")
-	public List<Aluno> listar() {
-		return repo.findAll();
+	public String listar(Model model){
+		model.addAttribute("alunos", repo.findAll());
+		return "alunos/lista";
+	}
+
+	@GetMapping("/novo")
+	public String novo(Model model){
+		model.addAttribute("aluno", new Aluno());
+		model.addAttribute("listaCursos", cursoRepo.findAll());
+		return "alunos/formulario";
 	}
 }

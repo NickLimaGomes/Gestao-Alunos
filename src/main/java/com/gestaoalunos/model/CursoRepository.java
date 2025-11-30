@@ -1,11 +1,13 @@
 package com.gestaoalunos.model;
 
-import java.util.List;
+//import java.util.List;
 
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CursoRepository extends Repository<Curso, Long> {
-	public Curso save(Curso curso);
-	public List<Curso> findAll();
+@Repository
+public interface CursoRepository extends JpaRepository<Curso, Long> {
+	// public Curso save(Curso curso);
+	// public List<Curso> findAll();
 }
 
