@@ -109,5 +109,3 @@ este projeto é didático e focado em:
 - thymeleaf + bootstrap  
 - organização básica do código  
 
-
-prontinho 💛
